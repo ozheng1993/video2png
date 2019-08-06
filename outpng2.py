@@ -22,14 +22,15 @@ f.write("test"+str(fe))
 f.close() 
 while(True):
 	ret, frame = cap.read()
-	print("totoal: "+str(round(counter/frames,3))+"% || "+ "output image "+str(counter2)+ " / "+str(round(frames/fe,0)))
-	if (counter< fe):
-		counter +=1
+	counter +=1
+
+	if (counter%fe!=0):
+		
 		continue
 	else:
-		counter=0
 		counter2+=1
-		cv2.imwrite("./"+path+"/"+str(counter2)+".png",frame) 
+		cv2.imwrite("./"+path+"/"+str(counter2)+".png",frame)
+		print("totoal: "+str(round(counter/frames*100,3))+"% || "+ "output image "+str(counter2)+ " / "+str(round(frames/fe,0))) 
 	if cv2.waitKey(1) & 0xFF == ord('q'):
         	break
 # When everything done, release the capture
