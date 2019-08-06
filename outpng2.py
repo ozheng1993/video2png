@@ -23,7 +23,7 @@ f.close()
 while(True):
 	ret, frame = cap.read()
 	counter +=1
-
+	if not ret:break
 	if (counter%fe!=0):
 		
 		continue
