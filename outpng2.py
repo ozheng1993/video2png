@@ -13,24 +13,28 @@ path = a
 if len(argv)>2:
 	fe=int(argv[2])
 else:
-	fe=600
+	fe=200
 if os.path.exists(a):
 	shutil.rmtree(path)
 os.mkdir(path)
-f = open("./"+path+"/"+"Readme.txt", "w+")
+f = open("./"+path+"/"+path+"Readme.txt", "w+")
 f.write("test"+str(fe)) 
 f.close() 
+framePoint=fe
+
 while(True):
 	ret, frame = cap.read()
+	framePoint = framePoint+fe
+	cap.set(cv2.CAP_PROP_POS_FRAMES, framePoint)
 	counter +=1
 	if not ret:break
-	if (counter%fe!=0):
+	# if (counter%fe!=0):
 		
-		continue
-	else:
-		counter2+=1
-		cv2.imwrite("./"+path+"/"+str(counter2)+".png",frame)
-		print("totoal: "+str(round(counter/frames*100,3))+"% || "+ "output image "+str(counter2)+ " / "+str(round(frames/fe,0))) 
+	# 	continue
+	# else:
+	counter2+=1
+	cv2.imwrite("./"+path+"/"+path+"_"+str(counter2)+".png",frame)
+	print("totoal: "+str(round(framePoint/frames*100,3))+"% || "+ "output image "+str(counter2)+ " / "+str(round(frames/fe,0))) 
 	if cv2.waitKey(1) & 0xFF == ord('q'):
         	break
 # When everything done, release the capture
